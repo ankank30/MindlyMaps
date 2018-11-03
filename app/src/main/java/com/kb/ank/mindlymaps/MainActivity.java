@@ -71,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     final Boolean TO_STATE = false;
 
     LatLng fromLatLng, toLatLng;
+
+    Boolean switchFromTo = true;
+    final Boolean FROM_SATE = true;
+    final Boolean TO_STATE = false;
+
+    LatLng fromLatLng, toLatLng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
