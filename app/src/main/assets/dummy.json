@@ -1,0 +1,461 @@
+{
+   "geocoded_waypoints" : [
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJu5SgsZ8eIDoR_jkAJd04pvk",
+         "types" : [ "route" ]
+      },
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJeTQxSqQeIDoR3DU5rpZJaQk",
+         "types" : [ "route" ]
+      }
+   ],
+   "routes" : [
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 22.2546041,
+               "lng" : 84.879475
+            },
+            "southwest" : {
+               "lat" : 22.2456475,
+               "lng" : 84.86683669999999
+            }
+         },
+         "copyrights" : "Map data ©2018 Google",
+         "legs" : [
+            {
+               "distance" : {
+                  "text" : "2.4 km",
+                  "value" : 2390
+               },
+               "duration" : {
+                  "text" : "4 mins",
+                  "value" : 248
+               },
+               "end_address" : "Unnamed Road, Sector 5, Rourkela, Odisha 769002, India",
+               "end_location" : {
+                  "lat" : 22.2456475,
+                  "lng" : 84.87038319999999
+               },
+               "start_address" : "Ring Road, Sector 3, Rourkela, Odisha 769006, India",
+               "start_location" : {
+                  "lat" : 22.253301,
+                  "lng" : 84.879475
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "1.4 km",
+                        "value" : 1350
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 125
+                     },
+                     "end_location" : {
+                        "lat" : 22.2540283,
+                        "lng" : 84.86688529999999
+                     },
+                     "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e toward \u003cb\u003eRing Road\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "cjyfCw_aeO?@A??@A??@A?A??@A?A?A?A??AA?CHeB|As@rAs@xBMt@QfBAH@nALtFFvDBnBDnBLdE@`@B^HlCHnDJnB@f@FvDHxEHbD"
+                     },
+                     "start_location" : {
+                        "lat" : 22.253301,
+                        "lng" : 84.879475
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.0 km",
+                        "value" : 1025
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 109
+                     },
+                     "end_location" : {
+                        "lat" : 22.2457003,
+                        "lng" : 84.8705138
+                     },
+                     "html_instructions" : "At \u003cb\u003eAmbagan Cir\u003c/b\u003e, take the \u003cb\u003e1st\u003c/b\u003e exit",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "unyfCaq~dO@@@??@@?@@@@?@@?t@CLCz@ID?h@EPANELCNGJG|BcCLOHMDCXc@VYJMHIHIDEHELINIRILEjGkADAB?LArBc@LEBALCbEgAFAn@Oh@MRGJCzC_A@?`A[|Ac@"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2540283,
+                        "lng" : 84.86688529999999
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "15 m",
+                        "value" : 15
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 14
+                     },
+                     "end_location" : {
+                        "lat" : 22.2456475,
+                        "lng" : 84.87038319999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the left\u003c/div\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "szwfCug_eODNBH"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2457003,
+                        "lng" : 84.8705138
+                     },
+                     "travel_mode" : "DRIVING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : {
+            "points" : "cjyfCw_aeOMFAAA?CHeB|As@rAs@xB_@|C?xATlLH~E\\tKT~GH~ER|JB@BBBBdCQz@G\\IZOjCsC`AoAd@g@z@c@bHsArCm@hG}A|@UfDcAbA[|Ac@DNBH"
+         },
+         "summary" : "Ring Road",
+         "warnings" : [],
+         "waypoint_order" : []
+      },
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 22.2547223,
+               "lng" : 84.8803169
+            },
+            "southwest" : {
+               "lat" : 22.2454673,
+               "lng" : 84.87045019999999
+            }
+         },
+         "copyrights" : "Map data ©2018 Google",
+         "legs" : [
+            {
+               "distance" : {
+                  "text" : "2.4 km",
+                  "value" : 2446
+               },
+               "duration" : {
+                  "text" : "5 mins",
+                  "value" : 321
+               },
+               "end_address" : "Unnamed Road, Sector 5, Rourkela, Odisha 769002, India",
+               "end_location" : {
+                  "lat" : 22.2456275,
+                  "lng" : 84.87045019999999
+               },
+               "start_address" : "Ring Road, Sector 3, Rourkela, Odisha 769006, India",
+               "start_location" : {
+                  "lat" : 22.253301,
+                  "lng" : 84.879475
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 295
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 31
+                     },
+                     "end_location" : {
+                        "lat" : 22.2546041,
+                        "lng" : 84.8771146
+                     },
+                     "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e toward \u003cb\u003eRing Road\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "cjyfCw_aeO?@A??@A??@A?A??@A?A?A?A??AA?CHeB|As@rAs@xBMt@QfB"
+                     },
+                     "start_location" : {
+                        "lat" : 22.253301,
+                        "lng" : 84.879475
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.2 km",
+                        "value" : 1158
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 127
+                     },
+                     "end_location" : {
+                        "lat" : 22.2460615,
+                        "lng" : 84.8795861
+                     },
+                     "html_instructions" : "Make a \u003cb\u003eU-turn\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eGo through 1 roundabout\u003c/div\u003e",
+                     "maneuver" : "uturn-right",
+                     "polyline" : {
+                        "points" : "gryfC}p`eOW?Bi@JaAZwAp@aBx@uA~A_BHG?A?A@??A?A@??A@??A@?@?@??A@?@?@@@?BEfAs@pAc@nAU|@EdBEzAEvBAnACxAEN?P?n@?x@BzAHjAJnAP|Cr@v@TbAZ"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2546041,
+                        "lng" : 84.8771146
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.0 km",
+                        "value" : 957
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 154
+                     },
+                     "end_location" : {
+                        "lat" : 22.2455476,
+                        "lng" : 84.87060649999999
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e3rd\u003c/b\u003e exit",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "{|wfCm`aeO@?@A@?@?@A@?@?@?@?@?@@@?@?@@@??@@?@@@@?@@?@@?@@@?@?@@@?@?@?@?@?@?@?@?@A@?@?@A@?@A@A@A@A@A@A?A@A?A@A?C?ATM`@C\\BxADx@B~B@xA@bAJhEF`CF`DHpDVjHBj@HlBFp@Bf@"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2460615,
+                        "lng" : 84.8795861
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "36 m",
+                        "value" : 36
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 9
+                     },
+                     "end_location" : {
+                        "lat" : 22.2456275,
+                        "lng" : 84.87045019999999
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e2nd\u003c/b\u003e exit\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the left\u003c/div\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "uywfCih_eO@?@?@?@??@@?@??@@??@@??@?@?@?@?@?@?@A@?@A?A??@A?A?A@?AA?A?A?MD"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2455476,
+                        "lng" : 84.87060649999999
+                     },
+                     "travel_mode" : "DRIVING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : {
+            "points" : "cjyfCw_aeOMFAAA?CHeB|As@rAs@xB_@|CW?Bi@JaAZwAp@aBx@uAhBgB?A@C@ADCF?lAy@pAc@nAUbDKrEGhDIjCBfDTnAP|Cr@zBp@BADAL@JFFL?LGNIFI@ATM`@C\\BxAHxDB|Cd@~SZvIHlBFp@Bf@@?@?@?B@B@@JEHK?MD"
+         },
+         "summary" : "Ring Road",
+         "warnings" : [],
+         "waypoint_order" : []
+      },
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 22.2533546,
+               "lng" : 84.879475
+            },
+            "southwest" : {
+               "lat" : 22.2454705,
+               "lng" : 84.87045019999999
+            }
+         },
+         "copyrights" : "Map data ©2018 Google",
+         "legs" : [
+            {
+               "distance" : {
+                  "text" : "1.9 km",
+                  "value" : 1889
+               },
+               "duration" : {
+                  "text" : "6 mins",
+                  "value" : 386
+               },
+               "end_address" : "Unnamed Road, Sector 5, Rourkela, Odisha 769002, India",
+               "end_location" : {
+                  "lat" : 22.2456275,
+                  "lng" : 84.87045019999999
+               },
+               "start_address" : "Ring Road, Sector 3, Rourkela, Odisha 769006, India",
+               "start_location" : {
+                  "lat" : 22.253301,
+                  "lng" : 84.879475
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "86 m",
+                        "value" : 86
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 16
+                     },
+                     "end_location" : {
+                        "lat" : 22.2530906,
+                        "lng" : 84.87873999999999
+                     },
+                     "html_instructions" : "Head \u003cb\u003ewest\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "cjyfCw_aeO?@A??@A??@A?A??@A?A?HPBFFLDPHVNx@"
+                     },
+                     "start_location" : {
+                        "lat" : 22.253301,
+                        "lng" : 84.879475
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 310
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 56
+                     },
+                     "end_location" : {
+                        "lat" : 22.2503027,
+                        "lng" : 84.8788816
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "yhyfCc{`eOr@Az@AfBGD?zBCrEK"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2530906,
+                        "lng" : 84.87873999999999
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.7 km",
+                        "value" : 708
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 125
+                     },
+                     "end_location" : {
+                        "lat" : 22.2498457,
+                        "lng" : 84.8722171
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "kwxfC_|`eODtA@\\Bj@@JDv@@j@?B?\\?JALAFAHCFAFCHCDEFGHGJGFGFABAF?J?P@^JrE?BDpB@~A?v@@^BL@JdAvEJVDLDJBF@H?D"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2503027,
+                        "lng" : 84.8788816
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.5 km",
+                        "value" : 467
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 132
+                     },
+                     "end_location" : {
+                        "lat" : 22.2457994,
+                        "lng" : 84.8733287
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "qtxfCkr_eOfBQpAKpAOrAO@A|@GNCHAj@Gj@GTIPGdAa@`@Q^Ol@Sx@U"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2498457,
+                        "lng" : 84.8722171
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 282
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 48
+                     },
+                     "end_location" : {
+                        "lat" : 22.2455476,
+                        "lng" : 84.87060649999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "g{wfCiy_eOVjHBj@HlBFp@Bf@"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2457994,
+                        "lng" : 84.8733287
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "36 m",
+                        "value" : 36
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 9
+                     },
+                     "end_location" : {
+                        "lat" : 22.2456275,
+                        "lng" : 84.87045019999999
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e2nd\u003c/b\u003e exit\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the left\u003c/div\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "uywfCih_eO@?@?@?@??@@?@??@@??@@??@?@?@?@?@?@?@A@?@A?A??@A?A?A@?AA?A?A?MD"
+                     },
+                     "start_location" : {
+                        "lat" : 22.2455476,
+                        "lng" : 84.87060649999999
+                     },
+                     "travel_mode" : "DRIVING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : {
+            "points" : "cjyfCw_aeOEDC@JXL^XpA|EKnIOFrBLzCAz@I`@U`@Y^AR@p@JvEFpE@vADXpAnFJXDV~I}@xAOvAOf@QtDwAx@UVjHLxCLxAB?@?BBBBALGBE?OD"
+         },
+         "summary" : "",
+         "warnings" : [],
+         "waypoint_order" : []
+      }
+   ],
+   "status" : "OK"
+}
