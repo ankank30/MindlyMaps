@@ -19,6 +19,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,13 +42,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import javax.xml.datatype.Duration;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "expectedError";
 
     GoogleMap googleMap;
     int count;
+    String test_url="https://maps.googleapis.com/maps/api/directions/json?origin=22.250474,84.868225&destination=22.259334,84.886645&alternatives=true&key=%20AIzaSyAHsNPuWJgiQr0zG51gEaZV1fati3jiRAQ";
 
+    Button fromButton, toButton;
+    double left_turn = 0, right_turn = 0;
+    double bias[];
+    double prefBias=0;
+    int prefRoute=0;
+    int length=0;
     LocationListener locationListener;
     LocationManager locationManager;
 
@@ -57,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     LatLng fromLatLng, toLatLng;
 
+    Boolean switchFromTo = true;
+    final Boolean FROM_SATE = true;
+    final Boolean TO_STATE = false;
+
+    LatLng fromLatLng, toLatLng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        fetchRoutes();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -281,5 +310,71 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Log.d("onPostExecute","without Polylines drawn");
         }
     }
+    public void fetchRoutes()
+    {
+        String turn="";
+        StringRequest request=new StringRequest(Request.Method.GET, test_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    JSONArray array = object.getJSONArray("routes");
+                    bias=new double[array.length()];
+                    length=bias.length;
+                    for(int i=0;i<bias.length;i++)
+                        bias[i]=0;
+                    for (int i = 0; i < array.length(); i++)// Find the bias in this loop
+                    {
+                        JSONObject o = array.getJSONObject(i);
+                        JSONArray legs = o.getJSONArray("legs");
+                        for (int j = 0; j < legs.length(); j++) {
+                            JSONObject steps = legs.getJSONObject(j);
+                            JSONArray paths = steps.getJSONArray("steps");
+                            for (int k = 0; k < paths.length(); k++) {
+                                String turn = "";
+                                JSONObject nodes = paths.getJSONObject(k);
+                                if (nodes.has("maneuver")) {
+                                    turn = nodes.getString("maneuver");
+                                    int isLeft=turn.indexOf("left");
+                                    int isRight=turn.indexOf("right");
+                                    if(isRight!=-1)
+                                        right_turn+=1;
+                                    if(isLeft!=-1)
+                                        left_turn+=1;
+                                    isLeft=0;
+                                    isRight=0;
+                                }
+                            }
 
+                        }
+                        if(left_turn==0)
+                        bias[i]=0;
+                        else bias[i]=right_turn/left_turn;
+                        left_turn=0;
+                        right_turn=0;
+                    }
+                    for(int i=0;i<length;i++)
+                    {
+                        if(bias[i]>prefBias)
+                        {
+                            prefBias=bias[i];
+                            prefRoute=i;
+                        }
+                    }
+                    Toast.makeText(getApplicationContext(),Integer.toString(prefRoute),Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+
+    }
 }
