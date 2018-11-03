@@ -1,6 +1,7 @@
 package com.kb.ank.mindlymaps;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,7 +38,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleMap googleMap;
     int count;
 
-    Button fromButton, toButton;
+    LocationListener locationListener;
+    LocationManager locationManager;
+
+    LottieAnimationView lottieAnimationView;
+
+    Boolean switchFromTo = true;
+    final Boolean FROM_SATE = true;
+    final Boolean TO_STATE = false;
+
+    LatLng fromLatLng, toLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +69,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             return;
         }
 
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        LocationListener locationListener = new LocationListener() {
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 //googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
                 //googleMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("It's Me!"));
+                googleMap.clear();
                 googleMap.addCircle(new CircleOptions().center(new LatLng(location.getLatitude(), location.getLongitude()))
                         .fillColor(Color.argb(150, 63, 81, 181))
                         .radius(location.getAccuracy())
@@ -100,6 +112,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         locationManager.getLastKnownLocation("gps");
         locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
 
+        lottieAnimationView = findViewById(R.id.animated_switch);
+        lottieAnimationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lottieAnimationView.getProgress() == 0) {
+                    lottieAnimationView.playAnimation();
+                } else {
+                    lottieAnimationView.resumeAnimation();
+                }
+            }
+        });
+
+        lottieAnimationView.addAnimatorUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                if (lottieAnimationView.getProgress() % 0.5 == 0) {
+                    lottieAnimationView.pauseAnimation();
+                    switchFromTo = !switchFromTo;
+                }
+            }
+        });
+
     }
 
     @Override
@@ -108,7 +142,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             case 10:
                 if (grantResults.length > 0 &&
                         grantResults[0] == PackageManager.PERMISSION_DENIED) {
-
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            requestPermissions(new String[]{
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    Manifest.permission.INTERNET}, 10);
+                        }
+                        return;
+                    }
+                    locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
                 }
         }
     }
@@ -117,7 +161,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(final GoogleMap googleMap) {
         this.googleMap = googleMap;
         googleMap.setMaxZoomPreference(100);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{
                         Manifest.permission.ACCESS_FINE_LOCATION,
@@ -129,18 +174,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setMyLocationEnabled(true);
         setLocation(googleMap, new LatLng(22.251019, 84.903629));
 
-
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
                 googleMap.addMarker(new MarkerOptions().position(latLng).title("Point " + count));
+                if(switchFromTo == FROM_SATE) {
+                    fromLatLng = latLng;
+                } else {
+                    toLatLng = latLng;
+                }
             }
         });
-
-    }
-
-    public void toFromButton(View view) {
-
     }
 
     private void setLocation(GoogleMap googleMap, LatLng latLng) {
