@@ -268,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             lineOptions.width(8);
             lineOptions.color(R.color.colorPrimary);
 
+
             Log.d("onPostExecute","onPostExecute lineoptions decoded");
 
         }
