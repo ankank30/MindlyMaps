@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -42,18 +44,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import javax.xml.datatype.Duration;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -80,11 +73,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     LatLng fromLatLng, toLatLng;
 
-    Boolean switchFromTo = true;
-    final Boolean FROM_SATE = true;
-    final Boolean TO_STATE = false;
-
-    LatLng fromLatLng, toLatLng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         lottieAnimationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switchFromTo = !switchFromTo;
                 if(lottieAnimationView.getProgress() == 0) {
                     lottieAnimationView.playAnimation();
                 } else {
@@ -172,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onAnimationUpdate(ValueAnimator animation) {
                 if (lottieAnimationView.getProgress() % 0.5 == 0) {
                     lottieAnimationView.pauseAnimation();
-                    switchFromTo = !switchFromTo;
                 }
             }
         });
@@ -232,6 +220,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void resetMap(View view) {
         googleMap.clear();
+        lottieAnimationView.setProgress(0);
+        fromLatLng = null;
+        toLatLng = null;
     }
 
     private void setLocation(GoogleMap googleMap, LatLng latLng) {
