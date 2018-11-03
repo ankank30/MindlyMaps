@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -61,8 +63,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     GoogleMap googleMap;
     int count;
-    String test_url="https://maps.googleapis.com/maps/api/directions/json?origin=22.250474,84.868225&destination=22.259334,84.886645&alternatives=true&key=%20AIzaSyAHsNPuWJgiQr0zG51gEaZV1fati3jiRAQ";
-
+    //String test_url="https://maps.googleapis.com/maps/api/directions/json?origin=22.250474,84.868225&destination=22.259334,84.886645&alternatives=true&key=%20AIzaSyAHsNPuWJgiQr0zG51gEaZV1fati3jiRAQ";
+    final String API_KEY="%20AIzaSyAHsNPuWJgiQr0zG51gEaZV1fati3jiRAQ";
+    String url_prefix="https://maps.googleapis.com/maps/api/directions/json?";
     Button fromButton, toButton;
     double left_turn = 0, right_turn = 0;
     double bias[];
@@ -73,12 +76,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     LocationManager locationManager;
 
     LottieAnimationView lottieAnimationView;
-
-    Boolean switchFromTo = true;
-    final Boolean FROM_SATE = true;
-    final Boolean TO_STATE = false;
-
-    LatLng fromLatLng, toLatLng;
 
     Boolean switchFromTo = true;
     final Boolean FROM_SATE = true;
@@ -99,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        fetchRoutes();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -159,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         lottieAnimationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switchFromTo = !switchFromTo;
                 if(lottieAnimationView.getProgress() == 0) {
                     lottieAnimationView.playAnimation();
                 } else {
@@ -239,6 +236,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void buttonClicked(View view) {
+        double startLat=fromLatLng.latitude;
+        double startLon=fromLatLng.longitude;
+        double stopLat=toLatLng.latitude;
+        double stopLon=toLatLng.longitude;
+        String api_call=url_prefix+"origin="+Double.toString(startLat)+","+Double.toString(startLon)+"&destination="+Double.toString(stopLat)+","+Double.toString(stopLon)+"&alternatives=true&key="+API_KEY;
+        fetchRoutes(api_call);
         setRoute(getApplicationContext());
     }
 
@@ -274,12 +277,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         PolylineOptions lineOptions = null;
 
         // Traversing through all the routes
-        for (int i = 0; i < result.size(); i++) {
+        //for (int i = 0; i < result.size(); i++)
             points = new ArrayList<>();
             lineOptions = new PolylineOptions();
 
             // Fetching i-th route
-            List<HashMap<String, String>> path = result.get(i);
+            List<HashMap<String, String>> path = result.get(prefRoute);
 
             // Fetching all the points in i-th route
             for (int j = 0; j < path.size(); j++) {
@@ -300,7 +303,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             Log.d("onPostExecute","onPostExecute lineoptions decoded");
 
-        }
 
         // Drawing polyline in the Google Map for the i-th route
         if(lineOptions != null) {
@@ -310,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Log.d("onPostExecute","without Polylines drawn");
         }
     }
-    public void fetchRoutes()
+    public void fetchRoutes(String test_url)
     {
         String turn="";
         StringRequest request=new StringRequest(Request.Method.GET, test_url, new Response.Listener<String>() {
@@ -358,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         if(bias[i]>prefBias)
                         {
                             prefBias=bias[i];
-                            prefRoute=i;
+                            prefRoute=i+1;
                         }
                     }
                     Toast.makeText(getApplicationContext(),Integer.toString(prefRoute),Toast.LENGTH_SHORT).show();
