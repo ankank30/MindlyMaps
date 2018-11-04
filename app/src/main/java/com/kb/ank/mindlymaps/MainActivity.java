@@ -2,6 +2,7 @@ package com.kb.ank.mindlymaps;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -288,6 +289,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    @SuppressLint("SetTextI8n")
     public void setRoute(Context context) {
 
         String json = null;
@@ -380,7 +382,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 textView = findViewById(R.id.textView_pred);
                 double time = timeAlgo - timeGoogle;
-                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)) + "%"));
+                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)).substring(0,7) + "%"));
 
             }
             catch(Exception e)
@@ -433,14 +435,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 textView = findViewById(R.id.textView_m_distance);
                 textView.setText(Double.toString(distanceAlgo / 1000) + " km");
 
-                textView = findViewById(R.id.textView_extra_time);
+                textView = findViewById(R.id.textView_time);
                 dispTimeGoogle = dispTimeGoogle.substring(0, 1);
                 dispTimeAlgo = dispTimeGoogle.substring(0,1);
                 textView.setText((timeAlgo - timeGoogle) / 60 + " mins");
 
                 textView = findViewById(R.id.textView_pred);
                 double time = timeAlgo - timeGoogle;
-                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)) + "%"));
+                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)).substring(0,7) + "%"));
             }
 
 
