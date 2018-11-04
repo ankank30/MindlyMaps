@@ -378,11 +378,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 textView = findViewById(R.id.textView_time);
                 dispTimeGoogle = dispTimeGoogle.substring(0, 1);
                 dispTimeAlgo = dispTimeGoogle.substring(0,1);
-                textView.setText(Double.toString((timeAlgo - timeGoogle) / 60).substring(0,4) + " mins");
+                textView.setText(Double.toString((timeAlgo - timeGoogle) / 60).substring(0,Math.min(4,Double.toString((timeAlgo - timeGoogle) / 60).length())) + " mins");
 
                 textView = findViewById(R.id.textView_pred);
                 double time = timeAlgo - timeGoogle;
-                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)).substring(0,7) + "%"));
+                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)).substring(0,3) + "%"));
 
             }
             catch(Exception e)
@@ -438,11 +438,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 textView = findViewById(R.id.textView_time);
                 dispTimeGoogle = dispTimeGoogle.substring(0, 1);
                 dispTimeAlgo = dispTimeGoogle.substring(0,1);
-                textView.setText(Double.toString((timeAlgo - timeGoogle) / 60).substring(0,4) + " mins");
+                textView.setText(Double.toString((timeAlgo - timeGoogle) / 60).substring(0,Math.min(4,Double.toString((timeAlgo - timeGoogle) / 60).length())) + " mins");
 
                 textView = findViewById(R.id.textView_pred);
                 double time = timeAlgo - timeGoogle;
-                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)).substring(0,7) + "%"));
+                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)).substring(0,3) + "%"));
             }
 
 
