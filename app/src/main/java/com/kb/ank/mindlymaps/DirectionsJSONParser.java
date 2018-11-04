@@ -16,6 +16,12 @@ import java.util.List;
 
 public class DirectionsJSONParser {
 
+    int prefPath=0;
+    DirectionsJSONParser(int prefPath)
+    {
+        this.prefPath=prefPath;
+    }
+
     /** Receives a JSONObject and returns a list of lists containing latitude and longitude */
     public List<List<HashMap<String,String>>> parse(JSONObject jObject){
 
@@ -23,6 +29,7 @@ public class DirectionsJSONParser {
         JSONArray jRoutes = null;
         JSONArray jLegs = null;
         JSONArray jSteps = null;
+
 
         try {
 
