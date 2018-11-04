@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -15,10 +16,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -84,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     double timeGoogle=0;
 
     LatLng fromLatLng, toLatLng;
+    CardView cardView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +96,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Window window = this.getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorAccentTrans));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.appTheme));
         }
+
+        cardView = findViewById(R.id.cardView_details);
+        cardView.animate()
+                .translationYBy(10000f);
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager()
@@ -175,6 +184,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        Typeface appFont = Typeface.createFromAsset(getAssets(), "raleway.ttf");
+        TextView textView = findViewById(R.id.textView_from);
+        textView.setTypeface(appFont);
+        textView = findViewById(R.id.textView_to);
+        textView.setTypeface(appFont);
+        Button button = findViewById(R.id.button_reset);
+        button.setTypeface(appFont);
+        button = findViewById(R.id.button_search);
+        button.setTypeface(appFont);
     }
 
     @Override
@@ -237,6 +255,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void setLocation(GoogleMap googleMap, LatLng latLng) {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.5f));
+    }
+
+    public void seeResult(View view) {
+        cardView.animate()
+                .translationYBy(10000f)
+                .setDuration(1500)
+                .start();
     }
 
     public void buttonClicked(View view) {
@@ -354,7 +379,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 lineOptions.width(8);
                 lineOptions.color(R.color.colorPrimary);
 
-
                 Log.d("onPostExecute","onPostExecute lineoptions decoded");
 
 
@@ -375,6 +399,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         deleteCache(getApplicationContext());
+        // Drawing polyline in the Google Map for the i-th route
+        if(lineOptions != null) {
+            cardView.animate()
+                    .translationYBy(-10000f)
+                    .setDuration(1500)
+                    .start();
+            googleMap.addPolyline(lineOptions).setColor(Color.argb(210, 255,00,00));
+        }
+        else {
+            Log.d("onPostExecute","without Polylines drawn");
+        }
     }
     public void fetchRoutes(String test_url)
     {
