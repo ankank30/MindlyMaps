@@ -22,4 +22,6 @@ calculate the bias
 * We've taken the right turn:left turn ratio as a preliminary parameter and assigned biases accordingly
 *The app compares the distance and time to be taken according to Google vs that of our algorithm
 
-
+[Screenshot 1](https://user-images.githubusercontent.com/13520364/47959243-b7074c80-e004-11e8-816f-f070d8f31a5a.jpeg)
+[Screenshot 2](https://user-images.githubusercontent.com/13520364/47959244-b79fe300-e004-11e8-98ab-6a60f60493aa.jpeg)
+[Screenshot 3](https://user-images.githubusercontent.com/13520364/47959245-b79fe300-e004-11e8-85bb-0eba05c3ac56.jpeg)
