@@ -86,6 +86,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     double timeAlgo=0;
     double timeGoogle=0;
 
+    String disptime[];
+    String dispTimeGoogle;
+    String dispTimeAlgo;
+
+
+
     LatLng fromLatLng, toLatLng;
     CardView cardView;
 
@@ -101,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         cardView = findViewById(R.id.cardView_details);
         cardView.animate()
-                .translationYBy(10000f);
+                .translationYBy(1000f);
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager()
@@ -259,8 +265,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void seeResult(View view) {
         cardView.animate()
-                .translationYBy(10000f)
-                .setDuration(1500)
+                .translationYBy(1000f)
+                .setDuration(500)
                 .start();
     }
 
@@ -355,6 +361,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 distanceGoogle=distanceArray[0];
                 timeAlgo=timeArray[prefRoute];
                 timeGoogle=timeArray[0];
+                dispTimeAlgo=disptime[prefRoute];
+                dispTimeGoogle=disptime[0];
+
+                TextView textView = findViewById(R.id.textView_g_time);
+                textView.setText(dispTimeAlgo + " min");
+                textView = findViewById(R.id.textView_m_time);
+                textView.setText(dispTimeGoogle + " min");
+                textView = findViewById(R.id.textView_g_distance);
+                textView.setText(Double.toString(distanceGoogle / 1000) + " km");
+                textView = findViewById(R.id.textView_m_distance);
+                textView.setText(Double.toString(distanceAlgo / 1000) + " km");
+
+                textView = findViewById(R.id.textView_time);
+                dispTimeGoogle = dispTimeGoogle.substring(0, 1);
+                dispTimeAlgo = dispTimeGoogle.substring(0,1);
+                textView.setText((timeAlgo - timeGoogle) / 60 + " mins");
+
+                textView = findViewById(R.id.textView_pred);
+                double time = timeAlgo - timeGoogle;
+                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)) + "%"));
 
             }
             catch(Exception e)
@@ -395,17 +421,38 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 distanceGoogle=distanceArray[0];
                 timeAlgo=timeArray[prefRoute];
                 timeGoogle=timeArray[0];
+                dispTimeAlgo=disptime[prefRoute];
+                dispTimeGoogle=disptime[0];
+
+                TextView textView = findViewById(R.id.textView_g_time);
+                textView.setText(dispTimeAlgo);
+                textView = findViewById(R.id.textView_m_time);
+                textView.setText(dispTimeGoogle);
+                textView = findViewById(R.id.textView_g_distance);
+                textView.setText(Double.toString(distanceGoogle / 1000) + " km");
+                textView = findViewById(R.id.textView_m_distance);
+                textView.setText(Double.toString(distanceAlgo / 1000) + " km");
+
+                textView = findViewById(R.id.textView_extra_time);
+                dispTimeGoogle = dispTimeGoogle.substring(0, 1);
+                dispTimeAlgo = dispTimeGoogle.substring(0,1);
+                textView.setText((timeAlgo - timeGoogle) / 60 + " mins");
+
+                textView = findViewById(R.id.textView_pred);
+                double time = timeAlgo - timeGoogle;
+                textView.setText((Double.toString(Math.abs(((0.6*time/360000) + ((distanceAlgo - distanceGoogle)/2000) - (prefBias / 40) * (time) / 60 * (distanceAlgo - distanceGoogle)) / 100)) + "%"));
             }
 
 
         deleteCache(getApplicationContext());
         // Drawing polyline in the Google Map for the i-th route
         if(lineOptions != null) {
-            cardView.animate()
-                    .translationYBy(-10000f)
-                    .setDuration(1500)
-                    .start();
             googleMap.addPolyline(lineOptions).setColor(Color.argb(210, 255,00,00));
+
+            cardView.animate()
+                    .translationYBy(-1000f)
+                    .setDuration(500)
+                    .start();
         }
         else {
             Log.d("onPostExecute","without Polylines drawn");
@@ -426,6 +473,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     for(int i=0;i<bias.length;i++)
                         bias[i]=0;
                     distanceArray=new double[length];
+                    disptime = new String[length];
                     timeArray=new double[length];
                     for (int i = 0; i < array.length(); i++)// Find the bias in this loop
                     {
@@ -436,6 +484,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             JSONObject distances=steps.getJSONObject("distance");
                             distanceArray[i]=Double.parseDouble(distances.getString("value"));
                             timeArray[i]=Double.parseDouble(steps.getJSONObject("duration").getString("value"));
+                            disptime[i]=steps.getJSONObject("duration").getString("text");
                             JSONArray paths = steps.getJSONArray("steps");
                             for (int k = 0; k < paths.length(); k++) {
                                 String turn = "";
@@ -468,7 +517,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             prefRoute=i+1;
                         }
                     }
-                    Toast.makeText(getApplicationContext(),Integer.toString(prefRoute),Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(),Integer.toString(prefRoute),Toast.LENGTH_SHORT).show();
                     setRoute(getApplicationContext());
                 } catch (JSONException e) {
                     e.printStackTrace();
