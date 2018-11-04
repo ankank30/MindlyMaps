@@ -378,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 textView = findViewById(R.id.textView_time);
                 dispTimeGoogle = dispTimeGoogle.substring(0, 1);
                 dispTimeAlgo = dispTimeGoogle.substring(0,1);
-                textView.setText((timeAlgo - timeGoogle) / 60 + " mins");
+                textView.setText(Double.toString((timeAlgo - timeGoogle) / 60).substring(0,4) + " mins");
 
                 textView = findViewById(R.id.textView_pred);
                 double time = timeAlgo - timeGoogle;
@@ -438,7 +438,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 textView = findViewById(R.id.textView_time);
                 dispTimeGoogle = dispTimeGoogle.substring(0, 1);
                 dispTimeAlgo = dispTimeGoogle.substring(0,1);
-                textView.setText((timeAlgo - timeGoogle) / 60 + " mins");
+                textView.setText(Double.toString((timeAlgo - timeGoogle) / 60).substring(0,4) + " mins");
 
                 textView = findViewById(R.id.textView_pred);
                 double time = timeAlgo - timeGoogle;
